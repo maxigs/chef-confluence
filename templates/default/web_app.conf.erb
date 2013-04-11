@@ -20,14 +20,12 @@
 
 	<% unless node['confluence']['apache2']['auth_user_file'].empty? %>
 	<Location />
-            Deny from all
-            #Allow from (You may set IP here / to access without password)
             AuthUserFile <%= node['confluence']['apache2']['auth_user_file'] %>
-            AuthName authorization
+            AuthName "Authorization"
             AuthType Basic
-            Satisfy Any # (or all, if IPs specified and require IP + pass)
-                        # any means neither ip nor pass
-            require valid-user
+            Require valid-user 
+	    Order deny,allow 
+	    Allow from all
 	</Location>
 	<% end %>
 
@@ -57,14 +55,11 @@
 
 	<% unless node['confluence']['apache2']['auth_user_file'].empty? %>
 	<Location />
-            Deny from all
-            #Allow from (You may set IP here / to access without password)
             AuthUserFile <%= node['confluence']['apache2']['auth_user_file'] %>
-            AuthName authorization
-            AuthType Basic
-            Satisfy Any # (or all, if IPs specified and require IP + pass)
-                        # any means neither ip nor pass
-            require valid-user
+            AuthName "Authorization"
+            Require valid-user 
+	    Order deny,allow 
+	    Allow from all
 	</Location>
 	<% end %>
 
