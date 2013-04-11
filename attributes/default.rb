@@ -114,6 +114,7 @@ default['confluence']['apache2']['error_log']          = ""
 default['confluence']['apache2']['port']               = 80
 default['confluence']['apache2']['virtual_host_alias'] = node['fqdn']
 default['confluence']['apache2']['virtual_host_name']  = node['hostname']
+default['confluence']['apache2']['auth_user_file']     = ""
 
 default['confluence']['apache2']['ssl']['access_log']       = ""
 default['confluence']['apache2']['ssl']['chain_file']       = ""
