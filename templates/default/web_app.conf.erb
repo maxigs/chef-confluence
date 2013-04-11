@@ -18,7 +18,7 @@
 	ErrorLog <%= node['confluence']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/stash-error.log" : node['confluence']['apache2']['error_log'] %>
 	LogLevel warn
 
-	<% unless node['confluence']['apache2']['auth_user_file'].blank? -%>
+	<% unless node['confluence']['apache2']['auth_user_file'].empty? -%>
 	<Location />
             Deny from all
             #Allow from (You may set IP here / to access without password)
@@ -55,7 +55,7 @@
 	ErrorLog <%= node['confluence']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-error.log" : node['confluence']['apache2']['ssl']['error_log'] %>
 	LogLevel warn
 
-	<% unless node['confluence']['apache2']['auth_user_file'].blank? -%>
+	<% unless node['confluence']['apache2']['auth_user_file'].empty? -%>
 	<Location />
             Deny from all
             #Allow from (You may set IP here / to access without password)
