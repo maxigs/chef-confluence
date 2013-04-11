@@ -18,6 +18,19 @@
 	ErrorLog <%= node['confluence']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/stash-error.log" : node['confluence']['apache2']['error_log'] %>
 	LogLevel warn
 
+	<% unless node['confluence']['apache2']['auth_user_file'].blank? -%>
+	<Location />
+            Deny from all
+            #Allow from (You may set IP here / to access without password)
+            AuthUserFile <%= node['confluence']['apache2']['auth_user_file'] -%>
+            AuthName authorization
+            AuthType Basic
+            Satisfy Any # (or all, if IPs specified and require IP + pass)
+                        # any means neither ip nor pass
+            require valid-user
+	</Location>
+	<% end %>
+
 	<Proxy *>
 		Order Deny,Allow
 		Allow from all
@@ -41,6 +54,19 @@
 	CustomLog <%= node['confluence']['apache2']['ssl']['access_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-access.log" : node['confluence']['apache2']['ssl']['access_log'] %> combined
 	ErrorLog <%= node['confluence']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-error.log" : node['confluence']['apache2']['ssl']['error_log'] %>
 	LogLevel warn
+
+	<% unless node['confluence']['apache2']['auth_user_file'].blank? -%>
+	<Location />
+            Deny from all
+            #Allow from (You may set IP here / to access without password)
+            AuthUserFile <%= node['confluence']['apache2']['auth_user_file'] -%>
+            AuthName authorization
+            AuthType Basic
+            Satisfy Any # (or all, if IPs specified and require IP + pass)
+                        # any means neither ip nor pass
+            require valid-user
+	</Location>
+	<% end %>
 
 	<Proxy *>
 		Order Deny,Allow
